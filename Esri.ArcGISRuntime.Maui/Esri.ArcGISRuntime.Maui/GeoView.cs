@@ -9,7 +9,7 @@ using Microsoft.Maui.Controls;
 
 namespace Esri.ArcGISRuntime.Maui
 {
-    public class GeoView : View, IGeoView
+    public abstract class GeoView : View, IGeoView
     {
         private protected GeoView() : base()
         {
