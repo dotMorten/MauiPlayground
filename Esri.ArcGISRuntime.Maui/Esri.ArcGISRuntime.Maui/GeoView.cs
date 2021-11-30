@@ -58,5 +58,9 @@ namespace Esri.ArcGISRuntime.Maui
             throw new NotSupportedException();
 #endif
         }
+
+        public event EventHandler? ViewpointChanged;
+
+        void IGeoView.ViewpointChanged(EventArgs e) => ViewpointChanged?.Invoke(this, e);
     }
 }

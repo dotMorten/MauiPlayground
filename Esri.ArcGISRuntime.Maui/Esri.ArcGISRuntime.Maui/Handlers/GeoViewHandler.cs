@@ -1,4 +1,5 @@
-﻿using Microsoft.Maui;
+﻿using System;
+using Microsoft.Maui;
 using Microsoft.Maui.Handlers;
 
 namespace Esri.ArcGISRuntime.Maui.Handlers
@@ -22,9 +23,16 @@ namespace Esri.ArcGISRuntime.Maui.Handlers
         };
 
 #if WINDOWS || __IOS__ || __ANDROID__
+        protected override void ConnectHandler(T nativeView)
+        {
+            nativeView.ViewpointChanged += OnViewpointChanged;
+            base.ConnectHandler(nativeView);
+        }
+
         protected override void DisconnectHandler(T nativeView)
         {
             nativeView.GraphicsOverlays = null;
+            nativeView.ViewpointChanged -= OnViewpointChanged;
             base.DisconnectHandler(nativeView);
         }
 #endif
@@ -36,5 +44,7 @@ namespace Esri.ArcGISRuntime.Maui.Handlers
                 handler.NativeView.GraphicsOverlays = geoView.GraphicsOverlays;
 #endif
         }
+
+        private void OnViewpointChanged(object? sender, EventArgs e) => VirtualView?.ViewpointChanged(e);
     }
 }
