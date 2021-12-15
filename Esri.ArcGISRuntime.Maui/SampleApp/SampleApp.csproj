@@ -8,6 +8,7 @@
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
+		<UseNativeHttpHandler Condition="'$(TargetFramework)' == 'net6.0-ios'">false</UseNativeHttpHandler> <!-- See https://github.com/xamarin/xamarin-macios/issues/13576 -->
 
 		<!-- Display name -->
 		<ApplicationTitle>SampleApp</ApplicationTitle>
