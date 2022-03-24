@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0-android;net6.0-ios</TargetFrameworks>
+		<TargetFrameworks>net6.0-android31.0;net6.0-ios14.2</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) and '$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net6.0-windows10.0.19041</TargetFrameworks>
+        <!--<TargetFrameworks>net6.0-ios14.2</TargetFrameworks>-->
 		<OutputType>Exe</OutputType>
 		<RootNamespace>SampleApp</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
-		<UseNativeHttpHandler Condition="'$(TargetFramework)' == 'net6.0-ios'">false</UseNativeHttpHandler> <!-- See https://github.com/xamarin/xamarin-macios/issues/13576 -->
 
 		<!-- Display name -->
 		<ApplicationTitle>SampleApp</ApplicationTitle>
@@ -47,7 +47,7 @@
 
 	<ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
 		<!-- Required - WinUI does not yet have buildTransitive for everything -->
-		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
+		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.1" />
 		<PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.0.30" />
 	</ItemGroup>
 
