@@ -22,24 +22,23 @@ namespace Esri.ArcGISRuntime.Maui.Handlers
         {
         }
 
-        /// <inheritdoc />
-        protected override void DisconnectHandler(ViewType nativeView)
+        protected override void DisconnectHandler(ViewType platformView)
         {
+            base.DisconnectHandler(platformView);
 #if WINDOWS || __IOS__ || __ANDROID__
-            nativeView.Scene = null;
+            platformView.Scene = null;
 #endif
-            base.DisconnectHandler(nativeView);
         }
         public static void MapScene(SceneViewHandler handler, ISceneView sceneView)
         {
 #if WINDOWS || __IOS__ || __ANDROID__
-            if (handler.NativeView != null)
-                handler.NativeView.Scene = sceneView.Scene;
+            if (handler.PlatformView != null)
+                handler.PlatformView.Scene = sceneView.Scene;
 #endif
         }
 
 #if WINDOWS || __IOS__ || __ANDROID__
-        protected override UI.Controls.SceneView CreateNativeView()
+        protected override ViewType CreatePlatformView()
         {
 #if __ANDROID__
              return new UI.Controls.SceneView(Context);
@@ -48,7 +47,7 @@ namespace Esri.ArcGISRuntime.Maui.Handlers
 #endif
         }
 #else
-        protected override object CreateNativeView() => throw new System.NotSupportedException();
+        protected override object CreatePlatformView() => throw new System.NotSupportedException();
 #endif
     }
 }

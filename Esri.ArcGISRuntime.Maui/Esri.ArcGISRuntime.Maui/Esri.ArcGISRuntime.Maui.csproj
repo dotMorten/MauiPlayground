@@ -1,19 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net6.0;net6.0-android;net6.0-ios</TargetFrameworks>
-        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) and '$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net6.0-windows10.0.19041</TargetFrameworks>
+        <TargetFrameworks>net6.0;net6.0-android31.0;net6.0-ios13.6</TargetFrameworks>
+        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) and '$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net6.0-windows10.0.18362</TargetFrameworks>
         <UseMaui>true</UseMaui>
         <SingleProject>true</SingleProject>
         <Nullable>enable</Nullable>
 
-        <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-ios'">14.2</SupportedOSPlatformVersion>
+        <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-ios'">13.0</SupportedOSPlatformVersion>
         <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android'">23.0</SupportedOSPlatformVersion>
         <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.18362.0</SupportedOSPlatformVersion>
         <TargetPlatformMinVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.18362.0</TargetPlatformMinVersion>
 
         <NoWarn>$(NoWarn);ESRI8000</NoWarn>
-        <ArcGISRuntimeDependencyVersion>100.13.0</ArcGISRuntimeDependencyVersion>
+        <ArcGISRuntimeDependencyVersion>100.13.1</ArcGISRuntimeDependencyVersion>
+        <AndroidGenerateResourceDesigner>false</AndroidGenerateResourceDesigner>
     </PropertyGroup>
 
     <ItemGroup>

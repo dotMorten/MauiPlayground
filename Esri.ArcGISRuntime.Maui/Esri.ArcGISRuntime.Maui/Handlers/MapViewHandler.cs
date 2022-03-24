@@ -18,33 +18,33 @@ namespace Esri.ArcGISRuntime.Maui.Handlers
         {
         }
 
-        protected override void DisconnectHandler(ViewType nativeView)
+        protected override void DisconnectHandler(ViewType PlatformView)
         {
+            base.DisconnectHandler(PlatformView);
 #if WINDOWS || __IOS__ || __ANDROID__
-            nativeView.Map = null;
+            PlatformView.Map = null;
 #endif
-            base.DisconnectHandler(nativeView);
         }
 
         public static void MapMap(MapViewHandler handler, IMapView mapView)
         {
 #if WINDOWS || __IOS__ || __ANDROID__
-            if (handler.NativeView != null)
-                handler.NativeView.Map = mapView.Map;
+            if (handler.PlatformView != null)
+                handler.PlatformView.Map = mapView.Map;
 #endif
         }
 
 #if WINDOWS || __IOS__ || __ANDROID__
-        protected override UI.Controls.MapView CreateNativeView()
+        protected override ViewType CreatePlatformView()
         {
 #if __ANDROID__
-            return new UI.Controls.MapView(Context);
+            return new ViewType(Context);
 #else
-            return new UI.Controls.MapView();
+            return new ViewType();
 #endif
         }
 #else
-        protected override object CreateNativeView() => throw new System.NotSupportedException();
+        protected override object CreatePlatformView() => throw new System.NotSupportedException();
 #endif
 
     }

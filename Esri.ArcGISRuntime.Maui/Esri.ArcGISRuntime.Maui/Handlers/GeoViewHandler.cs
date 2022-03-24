@@ -23,25 +23,25 @@ namespace Esri.ArcGISRuntime.Maui.Handlers
         };
 
 #if WINDOWS || __IOS__ || __ANDROID__
-        protected override void ConnectHandler(T nativeView)
+        protected override void ConnectHandler(T platformView)
         {
-            nativeView.ViewpointChanged += OnViewpointChanged;
-            base.ConnectHandler(nativeView);
+            platformView.ViewpointChanged += OnViewpointChanged;
+            base.ConnectHandler(platformView);
         }
 
-        protected override void DisconnectHandler(T nativeView)
+        protected override void DisconnectHandler(T platformView)
         {
-            nativeView.GraphicsOverlays = null;
-            nativeView.ViewpointChanged -= OnViewpointChanged;
-            base.DisconnectHandler(nativeView);
+            platformView.GraphicsOverlays = null;
+            platformView.ViewpointChanged -= OnViewpointChanged;
+            base.DisconnectHandler(platformView);
         }
 #endif
 
         public static void MapGraphicsOverlays(GeoViewHandler<S, T> handler, IGeoView geoView)
         {
 #if WINDOWS || __IOS__ || __ANDROID__
-            if (handler.NativeView != null)
-                handler.NativeView.GraphicsOverlays = geoView.GraphicsOverlays;
+            if (handler.PlatformView != null)
+                handler.PlatformView.GraphicsOverlays = geoView.GraphicsOverlays;
 #endif
         }
 

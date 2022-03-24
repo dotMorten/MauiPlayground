@@ -27,15 +27,15 @@ namespace Esri.ArcGISRuntime.Maui
         }
 
 #if WINDOWS || IOS || ANDROID
-        private UI.Controls.GeoView? NativeGeoView => Handler?.NativeView as UI.Controls.GeoView;
-        private UI.Controls.GeoView NativeGeoViewOrThrow => Handler?.NativeView as UI.Controls.GeoView ?? throw new InvalidOperationException("Operation not supported until view handler is initialized");
+        private UI.Controls.GeoView? PlatformGeoView => Handler?.PlatformView as UI.Controls.GeoView;
+        private UI.Controls.GeoView PlatformGeoViewOrThrow => Handler?.PlatformView as UI.Controls.GeoView ?? throw new InvalidOperationException("Operation not supported until view handler is initialized");
 
 #endif
 
         public void SetViewpoint(Viewpoint viewpoint)
         {
 #if WINDOWS || IOS || ANDROID
-            NativeGeoViewOrThrow.SetViewpoint(viewpoint);
+            PlatformGeoViewOrThrow.SetViewpoint(viewpoint);
 #else
             throw new NotSupportedException();
 #endif
@@ -44,7 +44,7 @@ namespace Esri.ArcGISRuntime.Maui
         public Task<bool> SetViewpointAsync(Viewpoint viewpoint)
         {
 #if WINDOWS || IOS || ANDROID
-            return NativeGeoViewOrThrow.SetViewpointAsync(viewpoint);
+            return PlatformGeoViewOrThrow.SetViewpointAsync(viewpoint);
 #else
             throw new NotSupportedException();
 #endif
@@ -53,7 +53,7 @@ namespace Esri.ArcGISRuntime.Maui
         public Task<IReadOnlyList<IdentifyLayerResult>> IdentifyLayersAsync(Microsoft.Maui.Graphics.Point screenPoint, double tolerance, bool returnPopupsOnly, long maximumResultsPerLayer, CancellationToken cancellationToken)
         {
 #if WINDOWS || IOS || ANDROID
-            return NativeGeoViewOrThrow.IdentifyLayersAsync(screenPoint.ToNativePoint(), tolerance, returnPopupsOnly, maximumResultsPerLayer, cancellationToken);
+            return PlatformGeoViewOrThrow.IdentifyLayersAsync(screenPoint.ToNativePoint(), tolerance, returnPopupsOnly, maximumResultsPerLayer, cancellationToken);
 #else
             throw new NotSupportedException();
 #endif
