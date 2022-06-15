@@ -54,10 +54,5 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Esri.ArcGISRuntime.Maui\Esri.ArcGISRuntime.Maui.csproj" />
 	</ItemGroup>
-
-	<PropertyGroup Condition="$(TargetFramework.Contains('-windows'))">
-		<OutputType>WinExe</OutputType>
-		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
-	</PropertyGroup>
 	
 </Project>
